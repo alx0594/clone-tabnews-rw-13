@@ -1,0 +1,21 @@
+describe("POST /api/v1/status", () => {
+  describe("Anonymous User", () => {
+    test("Retrieving current system status", async () => {
+      const response = await fetch("http://localhost:3000/api/v1/status", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      expect(response.status).toBe(405);
+
+      const responseBody = await response.json();
+      expect(responseBody).toEqual({
+        name: "MethodNotAllowedError",
+        message: "O método HTTP utilizado não é permitido.",
+        action: "Verificar o método HTTP utilizado.",
+        status_code: 405,
+      });
+    });
+  });
+});

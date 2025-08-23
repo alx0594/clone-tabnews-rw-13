@@ -3,9 +3,13 @@ import database from "infra/database.js";
 describe("Módulo Database", () => {
   describe("Database connect and sucessful query", () => {
     test("getNewClient()", async () => {
-      const dbClient = await database.getNewClient();
-      console.log(dbClient);
-      expect(dbClient._connected).toBe(true);
+      let dbClient;
+      try {
+        dbClient = await database.getNewClient();
+        expect(dbClient._connected).toBe(true);
+      } finally {
+        dbClient?.end();
+      }
     });
 
     test("query(queryObject)", async () => {

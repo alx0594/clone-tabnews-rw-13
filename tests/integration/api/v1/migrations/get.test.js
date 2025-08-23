@@ -1,3 +1,9 @@
+import orchestrator from "tests/orchestrator.js";
+
+beforeAll(async () => {
+  await orchestrator.clearDatabase();
+});
+
 describe("GET /api/v1/migrations", () => {
   describe("Anonymous User", () => {
     test("Retrieving Pending Migrations", async () => {
